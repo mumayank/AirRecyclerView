@@ -4,9 +4,7 @@
 # AirRecyclerView
 An android library written in Kotlin which makes implementing RecyclerView in your project a piece of cake!
 
-Method counts ~50
-
-Size ~50KB
+###### (method counts ~50, size ~50KB)
 
 [![](https://jitpack.io/v/mumayank/AirRecyclerView.svg)](https://jitpack.io/#mumayank/AirRecyclerView)
 
