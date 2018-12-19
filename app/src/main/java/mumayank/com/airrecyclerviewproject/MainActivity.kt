@@ -32,36 +32,23 @@ class MainActivity : AppCompatActivity() {
             object: AirRecyclerView.AirRecyclerViewCallbacks {
                 override fun getViewType(position: Int): Int {
                     return 0
-
-                    /*
-                    can also make use of multiple view types like this:
-
-                    if (position%3 == 0) {
-                        return VIEW_TYPE_1
-                    } else {
-                        return VIEW_TYPE_2
-                    }
-                     */
+                    // can also make use of multiple view types like this: if (position%3 == 0) { return VIEW_TYPE_1 } else { return VIEW_TYPE_2 }
                 }
 
                 override fun getViewLayout(viewType: Int): Int {
                     return R.layout.item
-
                     // can also make use of viewType
                 }
 
                 override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
                     return CustomViewHolder(view)
-
                     // can also make use of viewType
                 }
 
                 override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
                     val customViewHolder = viewHolder as CustomViewHolder
                     val string = strings[position]
-
                     customViewHolder.textView.text = string
-
                     // can also make use of viewType
                 }
 
@@ -69,12 +56,10 @@ class MainActivity : AppCompatActivity() {
                     return strings.size
                 }
 
-            },
-            StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL) // optional, by default LinearLayoutManager will be used
+            }
         )
 
         // rvAdapter can be used later to perform notifyDataSetChanged()
-
     }
 
     class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
