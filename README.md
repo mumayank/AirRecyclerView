@@ -59,7 +59,6 @@ Add this line in your app build.gradle:
 ```gradle
 dependencies {
   implementation 'com.github.mumayank:AirRecyclerView:LATEST_VERSION' // this line
-  implementation "com.android.support:recyclerview-v7:$support_lib_version" // this line
 }
 ```
 where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirRecyclerView.svg)](https://jitpack.io/#mumayank/AirRecyclerView)
