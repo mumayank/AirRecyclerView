@@ -63,4 +63,14 @@ dependencies {
 ```
 where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirRecyclerView.svg)](https://jitpack.io/#mumayank/AirRecyclerView)
 
+#### Additional Help
+
+CustomViewHolder:
+```kotlin
+class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val parentLayout: LinearLayout = view.parentLayout
+            val textView: TextView = view.textView
+}
+```
+
 That's all!
