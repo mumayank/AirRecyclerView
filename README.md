@@ -63,7 +63,7 @@ dependencies {
 ```
 where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirRecyclerView.svg)](https://jitpack.io/#mumayank/AirRecyclerView)
 
-#### Additional Help
+#### Just for reference:
 
 CustomViewHolder:
 ```kotlin
