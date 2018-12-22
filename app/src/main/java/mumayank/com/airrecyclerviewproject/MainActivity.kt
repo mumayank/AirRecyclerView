@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.item.view.*
 import mumayank.com.airrecyclerview.AirRecyclerView
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val parentLayout = view.parentLayout
-        val textView = view.textView
+        val parentLayout: LinearLayout = view.parentLayout
+        val textView: TextView = view.textView
     }
 }
