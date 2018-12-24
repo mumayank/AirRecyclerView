@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun getParentLayoutViewGroup(): ViewGroup {
-                return findViewById<ViewGroup>(R.id.parentLayout) as ViewGroup
+                return findViewById(R.id.parentLayout) as ViewGroup
             }
 
             override fun getViewType(position: Int): Int {
