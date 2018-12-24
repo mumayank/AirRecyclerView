@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             strings.add(i.toString())
         }
 
+        // hint: these vars can be used for multiple view types
         val VIEW_TYPE_1 = 0
         val VIEW_TYPE_2 = 1
 
@@ -43,14 +44,17 @@ class MainActivity : AppCompatActivity() {
 
             override fun getViewType(position: Int): Int {
                 return 0
+                // hint: you may return different view type vals using position param
             }
 
             override fun getViewLayout(viewType: Int): Int {
                 return R.layout.item
+                // hint: you may return different view layout vals using viewType param
             }
 
             override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
                 return CustomViewHolder(view)
+                // hint: you may return different custom view holder vals using viewType param
             }
 
             override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
@@ -61,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 customViewHolder.parentLayout.setOnClickListener {
                     Toast.makeText(this@MainActivity, string, Toast.LENGTH_SHORT).show()
                 }
+                // hint: you may init different view holders using viewType param
             }
 
             override fun getSize(): Int {
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        // rvAdapter can be used later to perform notifyDataSetChanged()
+        // hint: airRv.rvAdapter can be used later to perform notifyDataSetChanged()
     }
 
     class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
