@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 
-class AirRecyclerView {
+/*class AirRecyclerView {
 
     interface AirRecyclerViewCallbacks {
         fun getViewType(position: Int): Int
@@ -57,7 +57,19 @@ class AirRecyclerView {
 
     }
 
-}
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
