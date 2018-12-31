@@ -12,6 +12,7 @@ class AirRv(
     callback: Callback
 ){
     val rvAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    val rv: RecyclerView
 
     interface Callback {
         fun getAppContext(): Context
@@ -47,7 +48,7 @@ class AirRv(
 
         val rvView = LayoutInflater.from(callback.getAppContext()).inflate(R.layout.rv, callback.getParentLayoutViewGroup(), false)
         callback.getParentLayoutViewGroup().addView(rvView)
-        val rv = rvView.findViewById<RecyclerView>(R.id.rv)
+        rv = rvView.findViewById(R.id.rv)
         rv.layoutManager = callback.getLayoutManager()
         rv.adapter = rvAdapter
     }
