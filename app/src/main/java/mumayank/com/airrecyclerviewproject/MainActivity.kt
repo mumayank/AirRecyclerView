@@ -19,7 +19,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        setupRv()
+    }
+
+    private fun setupRv() {
         val strings = ArrayList<String>()
         for (i in 1..100) {
             strings.add(i.toString())

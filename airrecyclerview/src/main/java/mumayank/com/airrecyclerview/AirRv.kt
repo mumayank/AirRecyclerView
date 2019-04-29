@@ -26,6 +26,8 @@ class AirRv(
     }
 
     init {
+        callback.getParentLayoutViewGroup()?.removeAllViews()
+
         rvAdapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             override fun getItemViewType(position: Int): Int {
