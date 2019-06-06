@@ -29,6 +29,7 @@ class AirRv(
 
     init {
         callback.getRvHolderViewGroup()?.removeAllViews()
+        callback.getEmptyView()?.visibility = View.GONE
 
         rvAdapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
