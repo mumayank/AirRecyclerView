@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item.view.*
 import mumayank.com.airrecyclerview.AirRv
 
@@ -38,24 +39,27 @@ class MainActivity : AppCompatActivity() {
         val VIEW_TYPE_2 = 1
 
         val airRv = AirRv(object: AirRv.Callback {
-            override fun getLayoutManager(): RecyclerView.LayoutManager {
-                return LinearLayoutManager(this@MainActivity)
+            override fun getRvHolderViewGroup(): ViewGroup? {
+                return rvHolder
+            }
+
+            override fun getEmptyView(): View? {
+                return emptyTV
+            }
+
+            override fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
+                return LinearLayoutManager(appContext)
             }
 
             override fun getAppContext(): Context {
                 return this@MainActivity.applicationContext
             }
-
-            override fun getParentLayoutViewGroup(): ViewGroup {
-                return findViewById(R.id.parentLayout) as ViewGroup
-            }
-
             override fun getViewType(position: Int): Int {
                 return 0
                 // hint: you may return different view type vals using position param
             }
 
-            override fun getViewLayout(viewType: Int): Int {
+            override fun getViewLayoutId(viewType: Int): Int {
                 return R.layout.item
                 // hint: you may return different view layout vals using viewType param
             }

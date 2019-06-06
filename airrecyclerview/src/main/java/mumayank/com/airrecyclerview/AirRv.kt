@@ -15,17 +15,18 @@ class AirRv(
 
     interface Callback {
         fun getAppContext(): Context?
-        fun getParentLayoutViewGroup(): ViewGroup?
-        fun getLayoutManager(): RecyclerView.LayoutManager?
+        fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager?
+        fun getRvHolderViewGroup(): ViewGroup?
+        fun getEmptyView(): View?
+        fun getSize(): Int?
         fun getViewType(position: Int): Int?
-        fun getViewLayout(viewType: Int): Int?
+        fun getViewLayoutId(viewType: Int): Int?
         fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder
         fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int)
-        fun getSize(): Int?
     }
 
     init {
-        callback.getParentLayoutViewGroup()?.removeAllViews()
+        callback.getRvHolderViewGroup()?.removeAllViews()
 
         rvAdapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -34,7 +35,7 @@ class AirRv(
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                return callback.getViewHolder(LayoutInflater.from(callback.getAppContext()).inflate(callback.getViewLayout(viewType) ?: 0, parent, false), viewType)
+                return callback.getViewHolder(LayoutInflater.from(callback.getAppContext()).inflate(callback.getViewLayoutId(viewType) ?: 0, parent, false), viewType)
             }
 
             override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
@@ -47,10 +48,11 @@ class AirRv(
 
         }
 
-        val rvView = LayoutInflater.from(callback.getAppContext()).inflate(R.layout.rv, callback.getParentLayoutViewGroup(), false)
-        callback.getParentLayoutViewGroup()?.addView(rvView)
+        val rvView = LayoutInflater.from(callback.getAppContext()).inflate(R.layout.rv, callback.getRvHolderViewGroup(), false)
+        callback.getRvHolderViewGroup()?.addView(rvView)
+        callback.getEmptyView()?.visibility = if (callback.getSize() == 0) View.VISIBLE else View.GONE
         rv = rvView.findViewById(R.id.rv)
-        rv.layoutManager = callback.getLayoutManager()
+        rv.layoutManager = callback.getLayoutManager(callback.getAppContext())
         rv.adapter = rvAdapter
     }
 }
