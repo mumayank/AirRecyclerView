@@ -1,6 +1,7 @@
 package mumayank.com.airrecyclerview
 
 import android.content.Context
+import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class AirRv(
     callback: Callback
 ){
+    var callback: Callback? = null
     val rvAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     val rv: RecyclerView
 
@@ -50,9 +52,19 @@ class AirRv(
 
         val rvView = LayoutInflater.from(callback.getAppContext()).inflate(R.layout.rv, callback.getRvHolderViewGroup(), false)
         callback.getRvHolderViewGroup()?.addView(rvView)
-        callback.getEmptyView()?.visibility = if (callback.getSize() == 0) View.VISIBLE else View.GONE
+        showOrHideEmptyView(callback.getEmptyView(), callback.getSize())
         rv = rvView.findViewById(R.id.rv)
         rv.layoutManager = callback.getLayoutManager(callback.getAppContext())
         rv.adapter = rvAdapter
+        this.callback = callback
+    }
+
+    private fun showOrHideEmptyView(emptyView: View?, size: Int? = 0) {
+        emptyView?.visibility = if (size == 0) View.VISIBLE else View.GONE
+    }
+
+    fun notifyDataSetChanged() {
+        rv.adapter?.notifyDataSetChanged()
+        showOrHideEmptyView(callback?.getEmptyView(), callback?.getSize())
     }
 }
