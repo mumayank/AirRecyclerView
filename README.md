@@ -99,4 +99,16 @@ class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
 }
 ```
 
-That's all!
+#### Special note when using RV in RV
+
+define your viewPool:
+
+```kotlin
+val viewPool = RecyclerView.RecycledViewPool()
+```
+
+And use it like this:
+
+```kotlin
+subAirRv.rv.setRecycledViewPool(viewPool)
+```
