@@ -19,7 +19,6 @@ class AirRv(
         fun getAppContext(): Context?
         fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager?
         fun getRvHolderViewGroup(): ViewGroup?
-        fun getEmptyView(): View?
         fun getSize(): Int?
         fun getViewType(position: Int): Int?
         fun getViewLayoutId(viewType: Int): Int?
@@ -29,7 +28,6 @@ class AirRv(
 
     init {
         callback.getRvHolderViewGroup()?.removeAllViews()
-        callback.getEmptyView()?.visibility = View.GONE
 
         rvAdapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -53,19 +51,13 @@ class AirRv(
 
         val rvView = LayoutInflater.from(callback.getAppContext()).inflate(R.layout.rv, callback.getRvHolderViewGroup(), false)
         callback.getRvHolderViewGroup()?.addView(rvView)
-        showOrHideEmptyView(callback.getEmptyView(), callback.getSize())
         rv = rvView.findViewById(R.id.rv)
         rv.layoutManager = callback.getLayoutManager(callback.getAppContext())
         rv.adapter = rvAdapter
         this.callback = callback
     }
 
-    private fun showOrHideEmptyView(emptyView: View?, size: Int? = 0) {
-        emptyView?.visibility = if (size == 0) View.VISIBLE else View.GONE
-    }
-
     fun notifyDataSetChanged() {
         rv.adapter?.notifyDataSetChanged()
-        showOrHideEmptyView(callback?.getEmptyView(), callback?.getSize())
     }
 }

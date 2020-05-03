@@ -57,10 +57,6 @@ class RvActivity : AppCompatActivity() {
                 return rvHolder
             }
 
-            override fun getEmptyView(): View? {
-                return emptyTV
-            }
-
             override fun getSize(): Int? {
                 return strings.size
             }
