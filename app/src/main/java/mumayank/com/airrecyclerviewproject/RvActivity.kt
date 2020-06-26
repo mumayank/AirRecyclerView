@@ -45,38 +45,38 @@ class RvActivity : AppCompatActivity() {
         val VIEW_TYPE_2 = 1
 
         airRv = AirRv(object: AirRv.Callback {
-            override fun getAppContext(): Context? {
+            override fun aGetAppContext(): Context? {
                 return this@RvActivity
             }
 
-            override fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
+            override fun bGetLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
                 return LinearLayoutManager(appContext)
             }
 
-            override fun getRvHolderViewGroup(): ViewGroup? {
+            override fun cGetRvHolderViewGroup(): ViewGroup? {
                 return rvHolder
             }
 
-            override fun getSize(): Int? {
+            override fun dGetSize(): Int? {
                 return strings.size
             }
 
-            override fun getViewType(position: Int): Int? {
+            override fun eGetViewType(position: Int): Int? {
                 return 0
                 // hint: you may return different view type val using position param
             }
 
-            override fun getViewLayoutId(viewType: Int): Int? {
+            override fun fGetViewLayoutId(viewType: Int): Int? {
                 return R.layout.item
                 // hint: you may return different view layout val using viewType param
             }
 
-            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
+            override fun gGetViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
                 return CustomViewHolder(view)
                 // hint: you may return different view layout val using viewType param
             }
 
-            override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
+            override fun hGetBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
                 val customViewHolder = viewHolder as CustomViewHolder
                 val string = strings[position]
 
