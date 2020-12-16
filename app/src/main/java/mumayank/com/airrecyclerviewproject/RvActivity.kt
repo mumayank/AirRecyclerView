@@ -66,7 +66,7 @@ class RvActivity : AppCompatActivity() {
                 // hint: you may return different view type val using position param
             }
 
-            override fun fGetViewLayoutId(viewType: Int): Int? {
+            override fun fGetViewLayoutId(parent: ViewGroup, viewType: Int): Int? {
                 return R.layout.item
                 // hint: you may return different view layout val using viewType param
             }

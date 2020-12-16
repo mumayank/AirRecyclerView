@@ -20,7 +20,7 @@ class AirRv(
         fun cGetRvHolderViewGroup(): ViewGroup?
         fun dGetSize(): Int?
         fun eGetViewType(position: Int): Int?
-        fun fGetViewLayoutId(viewType: Int): Int?
+        fun fGetViewLayoutId(parent: ViewGroup, viewType: Int): Int?
         fun gGetViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder
         fun hGetBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int)
     }
@@ -35,7 +35,7 @@ class AirRv(
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                return callback.gGetViewHolder(LayoutInflater.from(callback.aGetAppContext()).inflate(callback.fGetViewLayoutId(viewType) ?: 0, parent, false), viewType)
+                return callback.gGetViewHolder(LayoutInflater.from(callback.aGetAppContext()).inflate(callback.fGetViewLayoutId(parent, viewType) ?: 0, parent, false), viewType)
             }
 
             override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
