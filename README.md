@@ -88,7 +88,7 @@ dependencies {
 ```
 where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirRecyclerView.svg)](https://jitpack.io/#mumayank/AirRecyclerView)
 
-#### Just for reference:
+### Just for reference:
 
 CustomViewHolder:
 ```kotlin
@@ -99,7 +99,7 @@ class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
 }
 ```
 
-#### Special note when using RV in RV
+### Special note when using RV in RV
 
 define your viewPool:
 
@@ -111,4 +111,104 @@ And use it like this:
 
 ```kotlin
 subAirRv.rv.setRecycledViewPool(viewPool)
+```
+
+### Special note when Infinite Scrolling
+
+Sometimes  we need pagination to display results in the RV. The conventional approach is to show page number at the bottom of the page with the option to go to the previous or the next page. This approach sucks. Ideally, more content (next page) should automatically load.
+
+Here's how to do it easily using AirRv:
+
+Add a switch var
+```kotlin
+private var isLoading = false
+```
+
+Set up an onScrollListener:
+```kotlin
+airRv?.rv?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == (airRv?.rvAdapter?.itemCount as Int) - 1) {
+                        // todo: load more data here and update your list
+                        isLoading = true
+                    }
+                }
+            }
+        })```
+
+When the data is done loading, simply turn the switch var off
+```kotlin
+isLoading = false
+```
+
+Additionally, here's how you should implement infinite scroll
+1. have a page no count
+2. have a boolean var tracking if end of the list has reached
+3. have a boolean var tracking if the content is loading (as mentioned above)
+
+Have 3 view types:
+1. Your regular item
+2. A load more / progress item (added in the end)
+3. An item denoting end of the list
+
+Your list size will be:
+```kotlin
+override fun dGetSize(): Int? {
+	return if (rvList.size == 0) 0 else rvList.size + 1
+}
+```
+
+You can return view type as:
+```kotlin
+			override fun eGetViewType(position: Int): Int? {
+                return when {
+                    position != rvList.size -> {
+                        ViewType.ITEM.index
+                    }
+                    isEndOfListReached -> {
+                        ViewType.END_OF_LIST.index
+                    }
+                    else -> {
+                        ViewType.LOAD_MORE.index
+                    }
+                }
+            }
+```
+### If using view binding
+Enable view binding
+```gradle
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+```
+Your custom view holder class simply becomes:
+```kotlin
+class CustomViewHolder(val binding: InfiniteRvItemBinding) : RecyclerView.ViewHolder(binding.root)
+```
+When defining AirRv,
+```kotlin
+var parents: ViewGroup? = null
+```
+Define it as:
+```kotlin
+			override fun fGetViewLayoutId(parent: ViewGroup, viewType: Int): Int? {
+                parents = parent
+                // rest of the code
+            }
+```
+And define your view holder as:
+```kotlin
+			override fun gGetViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
+                return  ItemViewHolder(
+                        	InfiniteRvItemBinding.inflate(
+                            	layoutInflater,
+                            	parents,
+                            	false
+                        )
+            }
 ```
